@@ -1,0 +1,9 @@
+h2.page-header
+  = @path
+li
+  a href=".."
+    | 回上層
+- for ele in @files
+  li
+    a href="#{@path}/#{ele}"
+      = ele

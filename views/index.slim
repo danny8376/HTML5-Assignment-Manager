@@ -1,0 +1,9 @@
+h2.page-header
+  | 首頁?
+毫無反應只是個首頁
+h2.page-header
+  | 清單
+- for ele in @files
+  li
+    a href="view/#{ele}"
+      = ele

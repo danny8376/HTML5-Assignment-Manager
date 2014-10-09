@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
+    script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+    link rel="stylesheet" href==url('/assets/bootstrap.theme.css')
+    title
+      | DannyAAM's Assignment Manager - HTML5 | HTML5作業猴管理系統(啥鬼!?
+  body
+    nav.navbar.navbar-static-top.as-nav
+      div.container
+        div.navbar-header
+          a.navbar-brand href==url('/')
+            | DannyAAM's Assignment Manager - HTML5
+        ul.nav.navbar-nav.navbar-right
+          li
+            a href==url('/about')
+              | 關於
+          li
+            a href==url('/admin')
+              | 管理
+
+    div.as-header
+      div.container
+        h1
+          | HTML5作業管理系統
+
+    div.container
+      == yield
+
+    footer.as-footer
+      div.container
+        p
+          | 可能是個版權宣告 &copy; 2014-

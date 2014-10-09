@@ -63,6 +63,7 @@ get "/view/*" do |path|
 		@files = get_filelist path
 		slim :view_list
 	else
+		content_type @path.split(".").last
 		if ENV['RACK_ENV'] == 'production'
 			headers "X-Accel-Redirect" => "/#{path}"
 		else

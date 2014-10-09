@@ -5,9 +5,15 @@ Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 
 
 require 'sinatra'
+require 'ipaddr'
 
 
 DATA_FOLDER = "assg_data"
+
+GITHUB_ADDRS = %w{
+	192.30.252.0/22
+	2620:112:3000::/44
+}.map{|addr| IPAddr.new addr}
 
 
 def render_header?
@@ -25,6 +31,10 @@ end
 
 def get_filelist(path)
 	Dir.entries(path).delete_if{|e| e.start_with? "."}
+end
+
+def validate_github
+	GITHUB_ADDRS.any? {|block| block.include? request.ip}
 end
 
 
@@ -59,6 +69,13 @@ get "/view/*" do |path|
 			File.open(path, "rb"){|f| f.read}
 		end
 	end
+end
+
+
+
+post "/github-webhook" do
+	halt 403, 'Github Only!' unless validate_github
+	EM.system('git -C #{DATA_FOLDER} pull') if env['HTTP_X_GITHUB_EVENT'] == "push"
 end
 
 =begin

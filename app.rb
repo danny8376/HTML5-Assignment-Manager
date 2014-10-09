@@ -37,7 +37,21 @@ def validate_github
 	GITHUB_ADDRS.any? {|block| block.include? request.ip}
 end
 
+def get_github_repo
+	git_config = "#{DATA_FOLDER}/.git/config"
+	if FileTest.exist? git_config
+		File.open(git_config, "r") do |f|
+			f.each_line do |line|
+				return [$1, $2] if line.match(/github.com[\/:]([^\/]*)\/(.+?)(?:\.git)?$/)
+			end
+		end
+	end
+	return ["someone", "NON-Github repository"]
+end
 
+
+
+GITHUB_USER, GITHUB_REPO = get_github_repo
 
 get "/" do
 	@files = get_filelist(DATA_FOLDER)

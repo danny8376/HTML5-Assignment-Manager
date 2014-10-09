@@ -75,7 +75,7 @@ end
 
 post "/github-webhook" do
 	halt 403, 'Github Only!' unless validate_github
-	EM.system('git -C #{DATA_FOLDER} pull') if env['HTTP_X_GITHUB_EVENT'] == "push"
+	EM.system('git --git-dir=#{DATA_FOLDER} pull') if env['HTTP_X_GITHUB_EVENT'] == "push"
 end
 
 =begin

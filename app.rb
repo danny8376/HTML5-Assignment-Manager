@@ -67,7 +67,10 @@ get "/admin" do
 end
 
 get "/view" do
-	redirect_to "/"
+	redirect to "/"
+end
+get "/view/" do
+	redirect to "/"
 end
 
 get "/view/*" do |path|

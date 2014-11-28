@@ -30,7 +30,7 @@ def sanitize_path(path)
 end
 
 def get_filelist(path)
-	Dir.entries(path).delete_if{|e| e.start_with? "."}
+	Dir.entries(path).delete_if{|e| e.start_with? "."}.sort
 end
 
 def validate_github
